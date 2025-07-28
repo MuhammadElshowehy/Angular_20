@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { StartWithSignalsComponent } from './start-with-signals/start-with-signals.component';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [StartWithSignalsComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
-export class App {
-  protected title = 'Angular_20';
-}
+export class App {}
