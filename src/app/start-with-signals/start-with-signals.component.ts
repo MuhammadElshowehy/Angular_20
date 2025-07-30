@@ -1,6 +1,8 @@
 import {
   Component,
   computed,
+  effect,
+  EffectRef,
   OnInit,
   Signal,
   signal,
@@ -16,8 +18,13 @@ export class StartWithSignalsComponent implements OnInit {
   showCount: WritableSignal<boolean> = signal(false);
   count: WritableSignal<number> = signal(0);
   conditionalCount: Signal<string> = signal('');
+  effect: EffectRef;
 
-  constructor() {}
+  constructor() {
+    this.effect = effect(() => {
+      console.log(`The count is: ${this.count()}`);
+    });
+  }
 
   ngOnInit() {
     this.showCount = signal(true);
@@ -32,6 +39,7 @@ export class StartWithSignalsComponent implements OnInit {
 
     setTimeout(() => {
       this.showCount.set(false);
+      this.effect.destroy();
       this.count.set(20); // This will not affect conditionalCount since showCount is false
       // note: count() based on showCount(), if you change count()
       // and showCount() is false, it will not update the conditionalCount.
