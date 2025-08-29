@@ -3,6 +3,7 @@ import {
   computed,
   effect,
   EffectRef,
+  linkedSignal,
   OnInit,
   Signal,
   signal,
@@ -38,11 +39,21 @@ export class StartWithSignalsComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.showCount.set(false);
-      this.effect.destroy();
-      this.count.set(20); // This will not affect conditionalCount since showCount is false
+      // this.showCount.set(false);
+      // this.effect.destroy();
+      // this.count.set(20); // This will not affect conditionalCount since showCount is false
       // note: count() based on showCount(), if you change count()
       // and showCount() is false, it will not update the conditionalCount.
     }, 3000);
+
+    // linkedSignal //
+    const shippingOptions = signal(['Ground', 'Air', 'Sea']);
+    const selectedOption = linkedSignal(() => shippingOptions()[0]);
+    // const selectedOption = signal(shippingOptions()[0]); // not work
+    console.log(selectedOption()); // 'Ground'
+    selectedOption.set(shippingOptions()[2]);
+    console.log(selectedOption()); // 'Sea'
+    shippingOptions.set(['Email', 'Will Call', 'Postal service']);
+    console.log(selectedOption()); // 'Email'
   }
 }
