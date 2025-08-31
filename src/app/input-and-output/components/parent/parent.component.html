@@ -1,2 +1,6 @@
 <p>parent works!</p>
-<app-child [inSource]="outsource()" [(towWay)]="sendToTwoWay"></app-child>
+<app-child
+  [inSource]="outsource()"
+  [(towWay)]="sendToTwoWay"
+  (changeName)="logChangedName($event)"
+></app-child>

@@ -26,4 +26,8 @@ export class ParentComponent implements OnInit {
       console.log(3);
     }, 3000);
   }
+
+  logChangedName(name: string) {
+    console.log(name);
+  }
 }
