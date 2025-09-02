@@ -29,7 +29,7 @@ export class ChildComponent implements OnInit {
   }
 
   transformString(value: string | undefined): string {
-    console.log(value);
+    // console.log(value);
     return value?.trim() ?? '';
   }
 }

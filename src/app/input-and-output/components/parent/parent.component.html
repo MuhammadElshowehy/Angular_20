@@ -4,3 +4,11 @@
   [(towWay)]="sendToTwoWay"
   (changeName)="logChangedName($event)"
 ></app-child>
+
+<!-- after next and every render -->
+<div>
+  <p>Data: {{ data }}</p>
+  <button (click)="updateData()">Update Data</button>
+  <div>Render count: {{ renderCount }}</div>
+</div>
+<!-- after next and every render -->
