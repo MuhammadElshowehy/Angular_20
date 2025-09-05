@@ -6,6 +6,7 @@ import {
   booleanAttribute,
   model,
   output,
+  signal,
 } from '@angular/core';
 
 @Component({
@@ -18,12 +19,14 @@ export class ChildComponent implements OnInit {
   inSource = input.required({ transform: this.transformString });
   towWay = model<string>('');
   changeName = output<string>();
+  text = signal('1111111111111');
   constructor() {}
 
   ngOnInit() {
     setTimeout(() => {
       this.towWay.update((value) => value.toUpperCase());
       this.changeName.emit('name changed successfully');
+      this.text.set('22222222222222');
     }, 3000);
     this.changeName.emit('name changed successfully');
   }

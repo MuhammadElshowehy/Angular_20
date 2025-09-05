@@ -1,13 +1,24 @@
 import {
+  AfterContentChecked,
   afterEveryRender,
   afterNextRender,
+  AfterViewChecked,
   Component,
+  computed,
+  contentChild,
+  contentChildren,
   DestroyRef,
   DoCheck,
   EffectRef,
+  ElementRef,
+  inject,
   input,
   OnInit,
+  Renderer2,
   signal,
+  TemplateRef,
+  viewChild,
+  viewChildren,
   WritableSignal,
 } from '@angular/core';
 import { ChildComponent } from '../child/child.component';
@@ -19,7 +30,7 @@ import { ChildComponent } from '../child/child.component';
   imports: [ChildComponent],
   standalone: true,
 })
-export class ParentComponent implements OnInit {
+export class ParentComponent implements OnInit, AfterViewChecked {
   outsource: WritableSignal<string> = signal('go out');
   sendToTwoWay = 'tow way data binding.';
 
@@ -27,7 +38,18 @@ export class ParentComponent implements OnInit {
   renderCount = 0;
   afterEveryRender!: EffectRef;
 
-  constructor(private destroyRef: DestroyRef) {
+  child = viewChild(ChildComponent);
+  childComp = computed(() => this.child()?.text);
+
+  childern = viewChildren(ChildComponent, { read: ElementRef });
+  childrenText = computed(() => this.childern());
+
+  content = contentChild(ChildComponent, { read: TemplateRef });
+  contentMethods = computed(() => this.content());
+
+  elementRef = inject(ElementRef);
+
+  constructor(private destroyRef: DestroyRef, private renderer: Renderer2) {
     // This will only run once, after the first render
     afterNextRender(() => {
       console.log('afterNextRender: This runs only once!');
@@ -60,10 +82,24 @@ export class ParentComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.contentMethods());
+    // console.log(this.childComp());
+    console.log(this.childrenText());
+
     setTimeout(() => {
+      console.log(this.childComp());
+      // console.log(this.childrenText());
       this.outsource.set('3 seconds');
       // console.log(3);
-    }, 3000);
+    }, 3100);
+  }
+
+  ngAfterViewChecked(): void {
+    console.log(this.contentMethods());
+    let el = this.elementRef.nativeElement.querySelector('#par');
+    // el.style.color = 'green';
+    this.renderer.setStyle(el, 'color', 'blue');
+    console.log(el);
   }
 
   logChangedName(name: string) {

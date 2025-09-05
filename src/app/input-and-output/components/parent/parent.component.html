@@ -3,7 +3,13 @@
   [inSource]="outsource()"
   [(towWay)]="sendToTwoWay"
   (changeName)="logChangedName($event)"
-></app-child>
+>
+  <p @if(true) style="color: red">projected content 1</p>
+</app-child>
+
+<app-child [inSource]="outsource()"
+  ><p id="par" style="color: red">projected content 2</p></app-child
+>
 
 <!-- after next and every render -->
 <div>
