@@ -1,2 +1,10 @@
 <!-- <app-start-with-signals></app-start-with-signals> -->
-<app-parent></app-parent>
+<!-- <app-parent></app-parent> -->
+
+<!-- start test render comps dynamically -->
+<select [(ngModel)]="selectedCompName">
+  <option value="one">one</option>
+  <option value="two">two</option>
+</select>
+<ng-container *ngComponentOutlet="selectedComp"></ng-container>
+<!-- end test render comps dynamically -->
