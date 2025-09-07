@@ -6,5 +6,10 @@
   <option value="one">one</option>
   <option value="two">two</option>
 </select>
-<ng-container *ngComponentOutlet="selectedComp"></ng-container>
+<ng-container *ngComponentOutlet="selectedComp"
+  >created with ng ngComponentOutlet</ng-container
+>
+<ng-template #option2>
+  <p>created with embeded view</p>
+</ng-template>
 <!-- end test render comps dynamically -->
