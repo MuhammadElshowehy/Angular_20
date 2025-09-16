@@ -22,15 +22,18 @@ import {
   WritableSignal,
 } from '@angular/core';
 import { ChildComponent } from '../child/child.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.css'],
-  imports: [ChildComponent],
+  imports: [ChildComponent, FormsModule],
   standalone: true,
 })
 export class ParentComponent implements OnInit, AfterViewChecked {
+  inputValue: string = '';
+
   outsource: WritableSignal<string> = signal('go out');
   sendToTwoWay = 'tow way data binding.';
 
@@ -61,10 +64,10 @@ export class ParentComponent implements OnInit, AfterViewChecked {
 
     // This will run after every render (including the first one)
     this.afterEveryRender = afterEveryRender(() => {
-      this.renderCount++;
-      console.log(
-        `afterEveryRender: This runs after every render! Count: ${this.renderCount}`
-      );
+      // this.renderCount++;
+      // console.log(
+      //   `afterEveryRender: This runs after every render! Count: ${this.renderCount}`
+      // );
       // Perfect for:
       // - Updating DOM elements based on data changes
       // - Recalculating layouts
@@ -104,5 +107,13 @@ export class ParentComponent implements OnInit, AfterViewChecked {
 
   logChangedName(name: string) {
     // console.log(name);
+  }
+
+  inputClicked(event: any) {
+    this.inputValue = event.target.value;
+  }
+
+  onKey(event: Event): void {
+    console.log(true);
   }
 }

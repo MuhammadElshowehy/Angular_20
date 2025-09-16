@@ -18,3 +18,10 @@
   <div>Render count: {{ renderCount }}</div>
 </div>
 <!-- after next and every render -->
+<hr />
+<input name="name" (blur)="inputClicked($event)" />
+<input name="copy" [(ngModel)]="inputValue" />
+<hr />
+<label>keyboard</label>
+<input type="text" (keyup.enter)="onKey($event)" />
+<hr />
