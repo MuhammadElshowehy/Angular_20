@@ -25,3 +25,5 @@
 <label>keyboard</label>
 <input type="text" (keyup.enter)="onKey($event)" />
 <hr />
+<p>{{ str1 | truncate : 20 : "..." }}</p>
+<p>{{ str2 | truncate : 20 : "..." }}</p>

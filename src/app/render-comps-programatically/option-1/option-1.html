@@ -1,1 +1,13 @@
 <p>option-1 works!</p>
+
+<hr />
+
+<ng-template #one>
+  <p [ngStyle]="{'color': 'red'}">temp one</p>
+</ng-template>
+<ng-template #two> <p [ngStyle]="{'color': 'green'}">temp two</p> </ng-template>
+<ng-template #three>
+  <p [ngStyle]="{'color': 'purple'}">temp three</p>
+</ng-template>
+
+<ng-container *ngTemplateOutlet="three"></ng-container>

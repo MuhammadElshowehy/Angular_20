@@ -23,12 +23,13 @@ import {
 } from '@angular/core';
 import { ChildComponent } from '../child/child.component';
 import { FormsModule } from '@angular/forms';
+import { TruncatePipe } from '../../../shared/pipes/truncate/truncate-pipe';
 
 @Component({
   selector: 'app-parent',
   templateUrl: './parent.component.html',
   styleUrls: ['./parent.component.css'],
-  imports: [ChildComponent, FormsModule],
+  imports: [ChildComponent, FormsModule, TruncatePipe],
   standalone: true,
 })
 export class ParentComponent implements OnInit, AfterViewChecked {
@@ -51,6 +52,9 @@ export class ParentComponent implements OnInit, AfterViewChecked {
   contentMethods = computed(() => this.content());
 
   elementRef = inject(ElementRef);
+
+  str1 = 'fsdl;akfdjgprgjsdfkljgmopwrgjopsdfjgkoerp;';
+  str2 = 'sdfjsdkljgfiow';
 
   constructor(private destroyRef: DestroyRef, private renderer: Renderer2) {
     // This will only run once, after the first render
